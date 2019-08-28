@@ -1,0 +1,122 @@
+﻿ /*registration-main*/
+ .regisreation-main{
+     position: relative;
+     width: 100%;
+ }
+
+ .registration-main-stage{
+     margin: 20px auto;
+     width: 65%;
+ }
+
+ .registration-main-stage .registration-cl1{
+     width: 100%;
+     padding-bottom: 30px;
+ }
+
+ .registration-main-stage .registration-cl1 .registration-cl1-center{
+     width: 45%;
+     padding-right: 5%;
+     margin: 0 auto;
+     border-bottom: 1px solid #404040;
+ }
+
+
+  /*form*/
+  .registration-cl1-center .form-group{
+      margin:  0 10px 20px 20px;
+  }
+
+  .registration-cl1-center .form-group .form-control{
+      width: 100%;
+      font-size: 16px;
+      padding: 11px 0 11px 18px;
+      border-top: 1px solid #c6c6c6;
+      border-left: 1px solid #c6c6c6;
+      border-bottom: 1px solid #eee;
+      border-right: 1px solid #eee;
+      color: #404040;
+      background: #f7f7f7;
+      box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1) inset;
+  }
+
+  .form-group a{
+    color: #404040;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'Times New Roman';
+  }
+
+  .form-group .form-right{
+      text-align: right;
+  }
+
+  .form-group button{
+      font-size: 18px;
+      vertical-align: middle;
+      border-radius: 10px;
+      background: #f7f7f7;
+  }
+
+.form-group button p{
+    margin: 10px 20px;
+}
+
+ .font-cl1 p{
+      font-size: 25px;
+      text-align: center;
+      color: #430df3;
+      font-family: 'Lobster', cursive;
+  }
+
+.registration-cl2{
+    width: 100%;
+    padding-bottom: 50px;
+}
+
+.registration-cl2 .registration-cl2-center{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.registration-cl2-center .font-cl2{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.registration-cl2-center .font-cl2 p{
+    font-size: 16px;
+    color: #000000;
+    font-family: 'Lobster', cursive;
+    font-weight: bold;
+}
+
+.registration-cl2-center a .bt-dn{
+    height: 50px;
+    font-size: 20px;
+    vertical-align: middle;
+    border-radius: 10px;
+    background: #ff6a00;
+    color: #f7f7f7;
+}
+
+footer{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+footer .footer-copy img{
+    width: 56px;
+    height: 23px;
+    vertical-align: middle;
+}
+
+footer .footer-copy .footer-p{
+    display: inline-block;
+}
+
+.field-validation-error{
+    color: #ff0000;
+    font-size: 17px;
+}

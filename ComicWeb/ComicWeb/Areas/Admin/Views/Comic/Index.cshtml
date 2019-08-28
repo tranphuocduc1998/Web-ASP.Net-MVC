@@ -1,0 +1,76 @@
+﻿@model IEnumerable<ComicWeb.Areas.Admin.Models.Comic>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Comicname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Picture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brief)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tags)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ViewNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Statuss)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comicname)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Picture)*@
+            <img style="width: 200px; height: 150px;" src="/Picture/Comic_Img/@item.Picture" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Brief)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tags)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ViewNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Statuss)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id=item.ComicID }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id=item.ComicID }) |
+            @Html.ActionLink("Xóa", "Delete", new { id=item.ComicID })
+        </td>
+    </tr>
+}
+
+</table>

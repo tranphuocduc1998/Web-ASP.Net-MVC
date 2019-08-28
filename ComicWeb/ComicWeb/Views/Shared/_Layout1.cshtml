@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/Css/Login.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Css/Registration.css" />
+</head>
+<body>
+    <div class="stage">
+        <div class="stage-top">
+            <div class="stage-top-flright">
+                <div class="link-main-comic">
+                    <a href="~/Home/Index">
+                        <h2>Comic trang chủ</h2>
+                    </a>
+                </div>
+                <span>|</span>
+                <div class="link-support">
+                    <a href="#">
+                        <h2>hỗ trợ</h2>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <p class="icon-logo">
+            <img src="~/Picture/IconWeb/comico_02.png" />
+        </p>
+        <div>
+            @RenderBody()
+        </div>
+        <footer>
+            <div class="footer-copy">
+                <img src="~/Picture/IconWeb/comico_02.png" />
+                <div class="footer-p">© VN Comic Web</div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿@using ComicWeb.Areas.Admin.Models
+@model Administrators
+
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+<div class="registration-main">
+    <div class="registration-main-stage">
+        <div class="registration-cl1">
+            <div class="registration-cl1-center">
+                @using (Html.BeginForm())
+                {
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Fullname, new { @class = "form-control", @placeholder = "nhập họ tên của bạn" })
+                        @Html.ValidationMessageFor(model => model.Fullname)
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @placeholder = "tên đăng nhập" })
+                        @Html.ValidationMessageFor(model => model.Username)
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(model => model.Passwords, new { @class = "form-control", @placeholder = "password của bạn" })
+                        @Html.ValidationMessageFor(model => model.Passwords)
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "email của bạn" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                    <div class="form-group form-right">
+                        <div class="form-right">
+                            <button type="submit"><p>đăng ký</p></button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="registration-cl2">
+            <div class="registration-cl2-center">
+                <div class="font-cl2">
+                    <p>Bạn đã là thành viên của Comic Web</p>
+                </div>
+                <a href="/Home/Login">
+                    <input class="bt-dn" type="button" value="đăng nhập Comic Web" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

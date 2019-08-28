@@ -1,0 +1,109 @@
+﻿/* Style tab links */
+.tablink {
+    background-color: #808080;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 25%;
+}
+
+.tablink:hover {
+    background-color: #000000;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+    color: black;
+    display: none;
+    padding: 100px 20px;
+    height: 100%;
+}
+
+#Home {}
+#News {}
+#Contact {}
+#About {}
+
+.box-theloai{
+    max-width:1080px;
+    margin: 40px auto 32px;
+}
+
+.boxlist-theloai{
+    max-width: 1080px;
+    padding: 0 0 5px 0;
+    margin: 15px auto 0;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.list-item{
+    clear: both;
+    width: 25%;
+    margin-bottom: 40px;
+    margin: 0 4% 16px;
+    padding: 0;
+    border: none;
+    display: inline-block;
+}
+
+.list-item-ul{
+    width: 100%;
+}
+
+.list-item .list-item-inner{
+    display: block;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    table-layout: fixed;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.list-item .list-item-inner .list-item-img{
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+.list-item .list-item-inner .list-item-img img{
+    width: 100%;
+    max-height: 260px;
+    height: auto;
+    display:block;
+    height: 100%;
+    max-height: 150px;
+}
+
+.list-item .list-item-inner .list-item-imgbody .list-item-label1{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+}
+
+.list-item .list-item-inner .list-item-imgbody .list-item-label2{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 16px;
+    color: #808080;
+}
+.list-item .list-item-inner .list-item-imgbody .list-item-label3{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.list-item-ul .list-item a{
+    text-decoration: none;
+    line-height: 1.5;
+}

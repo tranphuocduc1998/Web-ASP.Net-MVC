@@ -1,0 +1,140 @@
+﻿@{
+    if (Session["userid"] == null)
+    {
+        Response.Redirect("/Home/Login");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/Areas/User/Content/Css/_Layout.css" />
+</head>
+<body>
+    <div class="stage">
+        <div class="stage_body stage_body_header">
+            <div class="comic_header">
+                <header class="header1 header1_wrapper comic_fixheader" role="navigation">
+                    <div class="header1_main">
+                        <div class="header1_main_action">
+                            <p>
+                                <a href="#" class="link_icon_logo">
+                                    <img src="~/Picture/IconWeb/comico_02.png" class="icon_logo" />
+                                </a>
+                            </p>
+                        </div>
+                        <ul class="header1_main_action1">
+                            <li class="list_action1_Focus">
+                                <a href="#" class="list_action1_Focus_inner">
+                                    Bảng Xếp Hạng
+                                </a>
+                            </li>
+                            <li class="list_action1_Focus">
+                                <a href="/TheLoai/Index" class="list_action1_Focus_inner">
+                                    Thể Loại
+                                </a>
+                            </li>
+                            <li class="list_action1_Focus">
+                                <a href="#" class="list_action1_Focus_inner">
+                                    List Truyện
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="header1_main_action2">
+                            <ul class="list_action2">
+                                <li class="list_action2_item">
+                                    <form action="#" class="list_action2_item_inner" method="get">
+                                        <div class="list_action2_search">
+                                            <input type="text" class="list_action2_search_input" maxlength="50" />
+                                            <input type="submit" class="icon-search list_action2_search_submit" value="" />
+                                        </div>
+                                    </form>
+                                </li>
+                                <li class="list_action2_login">
+                                    @if (Session["userid"] == null)
+                                    {
+                                        <a href="/Home/Login" class="list_action2_login_inner">
+                                            <font style="vertical-align: inherit; font-size: 20px;">
+                                                Đăng Nhập
+                                            </font>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <div class="dropdown">
+                                            <div class="dropbtn">
+                                                <img src="/Picture/Avatar/@Session["Avatar"]" />
+                                            </div>
+                                            <div class="dropdown-content">
+                                                <a href="/User/MyCourses/Index">Trang Cá Nhân</a>
+                                                <a href="/Home/Login">Thoát</a>
+                                            </div>
+                                        </div>
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+            </div>
+            <div class="stage_body02">
+                <div class="stage_center">
+                    <div class="stage_container">
+                        <div class="stage_container_left">
+                            <div class="left_thongtin">
+                                <div class="Img_thongtin">
+                                    <img src="~/Picture/Avatar/@Session["avatar"]" />
+                                </div>
+                                <div class="text_thongtin">
+                                    <p>@Session["fullname"]</p>
+                                </div>
+                                <ul class="nav">
+                                    <li class="active"><a href="#">Thông tin cá nhân</a></li>
+                                    <li><a href="#">Các truyện đang theo dõi</a></li>
+                                </ul>
+                                <div class="user_out">
+                                        @Html.ActionLink("Đăng xuất", "user_out")
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stage_container_right">
+                                @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="comic-footer">
+        <div class="comic-footer-media">
+            <h2 class="comic-footer-H">
+                <font style="vertical-align: inherit">Comic liên kết với các tài khoản</font>
+            </h2>
+            <div class="feedback">
+                <ul>
+                    <li class="feedback-item">
+                        <a href="#" target="_blank">
+                            <p>
+                                <img src="~/Picture/IconWeb/facebook_03.png" alt="Facebook" width="30px" height="30px" />
+                            </p>
+                        </a>
+                    </li>
+                    <li class="feedback-item">
+                        <a href="#" target="_blank">
+                            <p>
+                                <img src="~/Picture/IconWeb/googleplus_03.png" alt="gooleplus" width="30px" height="30px" />
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p class="comic-footer-copy">
+            <small>© Comic Truyen Tranh Online | Truyện tranh, Đọc truyện tranh Online</small>
+        </p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ComicWebModelStoreContainer" CdmEntityContainer="ComicWebEntities">
+    <EntitySetMapping Name="Administrators">
+      <EntityTypeMapping TypeName="ComicWebModel.Administrator">
+        <MappingFragment StoreEntitySet="Administrator">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Passwords" ColumnName="Passwords" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+          <ScalarProperty Name="Allowed" ColumnName="Allowed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="ComicWebModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Categoryname" ColumnName="Categoryname" />
+          <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Category_Comic">
+      <EntityTypeMapping TypeName="ComicWebModel.Category_Comic">
+        <MappingFragment StoreEntitySet="Category_Comic">
+          <ScalarProperty Name="ComicID" ColumnName="ComicID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comics">
+      <EntityTypeMapping TypeName="ComicWebModel.Comic">
+        <MappingFragment StoreEntitySet="Comic">
+          <ScalarProperty Name="ComicID" ColumnName="ComicID" />
+          <ScalarProperty Name="Comicname" ColumnName="Comicname" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="Brief" ColumnName="Brief" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Tags" ColumnName="Tags" />
+          <ScalarProperty Name="ViewNo" ColumnName="ViewNo" />
+          <ScalarProperty Name="Statuss" ColumnName="Statuss" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Follows">
+      <EntityTypeMapping TypeName="ComicWebModel.Follow">
+        <MappingFragment StoreEntitySet="Follow">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ComicID" ColumnName="ComicID" />
+          <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TopComics">
+      <EntityTypeMapping TypeName="ComicWebModel.TopComic">
+        <MappingFragment StoreEntitySet="TopComic">
+          <ScalarProperty Name="TopComicID" ColumnName="TopComicID" />
+          <ScalarProperty Name="TopName" ColumnName="TopName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TopNames">
+      <EntityTypeMapping TypeName="ComicWebModel.TopName">
+        <MappingFragment StoreEntitySet="TopName">
+          <ScalarProperty Name="TopComicID" ColumnName="TopComicID" />
+          <ScalarProperty Name="ComicID" ColumnName="ComicID" />
+          <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

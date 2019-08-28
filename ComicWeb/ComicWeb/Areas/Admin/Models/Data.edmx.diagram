@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="045571ad05d74939974c13be01127092" Name="Diagram1">
+        <EntityTypeShape EntityType="ComicWebModel.Administrator" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComicWebModel.Category" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComicWebModel.Category_Comic" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComicWebModel.Comic" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComicWebModel.Follow" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComicWebModel.TopComic" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComicWebModel.TopName" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="ComicWebModel.FK_Co_Ad" ManuallyRouted="false" />
+        <AssociationConnector Association="ComicWebModel.FK_FL_Ad" ManuallyRouted="false" />
+        <AssociationConnector Association="ComicWebModel.FK_CaCo_Ca" ManuallyRouted="false" />
+        <AssociationConnector Association="ComicWebModel.FK_CaCo_Co" ManuallyRouted="false" />
+        <AssociationConnector Association="ComicWebModel.FK_FL_Co" ManuallyRouted="false" />
+        <AssociationConnector Association="ComicWebModel.FK_TN_Ca" ManuallyRouted="false" />
+        <AssociationConnector Association="ComicWebModel.FK_TN_TC" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

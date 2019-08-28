@@ -1,0 +1,36 @@
+﻿@model ComicWeb.Areas.Admin.Models.Category_Comic
+
+<div>
+    <h4>Category_Comic</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ComicID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComicID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descriptions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descriptions)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Quay lại danh sách", "Index")
+</p>

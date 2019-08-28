@@ -1,0 +1,512 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ComicWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="64" />
+          <Property Name="Passwords" Type="varchar" MaxLength="256" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="64" />
+          <Property Name="Email" Type="varchar" MaxLength="256" />
+          <Property Name="Avatar" Type="varchar" MaxLength="256" />
+          <Property Name="isAdmin" Type="int" />
+          <Property Name="Allowed" Type="int" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Categoryname" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Descriptions" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Category_Comic">
+          <Key>
+            <PropertyRef Name="ComicID" />
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="ComicID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Descriptions" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Comic">
+          <Key>
+            <PropertyRef Name="ComicID" />
+          </Key>
+          <Property Name="ComicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Comicname" Type="nvarchar" MaxLength="512" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="256" />
+          <Property Name="Author" Type="nvarchar" MaxLength="256" />
+          <Property Name="Brief" Type="nvarchar" MaxLength="2000" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Tags" Type="nvarchar" MaxLength="128" />
+          <Property Name="ViewNo" Type="int" />
+          <Property Name="Statuss" Type="nvarchar" MaxLength="32" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Follow">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ComicID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ComicID" Type="int" Nullable="false" />
+          <Property Name="Descriptions" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="TopComic">
+          <Key>
+            <PropertyRef Name="TopComicID" />
+          </Key>
+          <Property Name="TopComicID" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="TopName" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="TopName">
+          <Key>
+            <PropertyRef Name="TopComicID" />
+            <PropertyRef Name="ComicID" />
+          </Key>
+          <Property Name="TopComicID" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ComicID" Type="int" Nullable="false" />
+          <Property Name="Descriptions" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <Association Name="FK_CaCo_Ca">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Category_Comic" Type="Self.Category_Comic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Category_Comic">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaCo_Co">
+          <End Role="Comic" Type="Self.Comic" Multiplicity="1" />
+          <End Role="Category_Comic" Type="Self.Category_Comic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comic">
+              <PropertyRef Name="ComicID" />
+            </Principal>
+            <Dependent Role="Category_Comic">
+              <PropertyRef Name="ComicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Co_Ad">
+          <End Role="Administrator" Type="Self.Administrator" Multiplicity="1" />
+          <End Role="Comic" Type="Self.Comic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrator">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comic">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FL_Ad">
+          <End Role="Administrator" Type="Self.Administrator" Multiplicity="1" />
+          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrator">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Follow">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FL_Co">
+          <End Role="Comic" Type="Self.Comic" Multiplicity="1" />
+          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comic">
+              <PropertyRef Name="ComicID" />
+            </Principal>
+            <Dependent Role="Follow">
+              <PropertyRef Name="ComicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TN_Ca">
+          <End Role="Comic" Type="Self.Comic" Multiplicity="1" />
+          <End Role="TopName" Type="Self.TopName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comic">
+              <PropertyRef Name="ComicID" />
+            </Principal>
+            <Dependent Role="TopName">
+              <PropertyRef Name="ComicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TN_TC">
+          <End Role="TopComic" Type="Self.TopComic" Multiplicity="1" />
+          <End Role="TopName" Type="Self.TopName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TopComic">
+              <PropertyRef Name="TopComicID" />
+            </Principal>
+            <Dependent Role="TopName">
+              <PropertyRef Name="TopComicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ComicWebModelStoreContainer">
+          <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_Comic" EntityType="Self.Category_Comic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comic" EntityType="Self.Comic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Follow" EntityType="Self.Follow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TopComic" EntityType="Self.TopComic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TopName" EntityType="Self.TopName" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CaCo_Ca" Association="Self.FK_CaCo_Ca">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category_Comic" EntitySet="Category_Comic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaCo_Co" Association="Self.FK_CaCo_Co">
+            <End Role="Comic" EntitySet="Comic" />
+            <End Role="Category_Comic" EntitySet="Category_Comic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Co_Ad" Association="Self.FK_Co_Ad">
+            <End Role="Administrator" EntitySet="Administrator" />
+            <End Role="Comic" EntitySet="Comic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FL_Ad" Association="Self.FK_FL_Ad">
+            <End Role="Administrator" EntitySet="Administrator" />
+            <End Role="Follow" EntitySet="Follow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FL_Co" Association="Self.FK_FL_Co">
+            <End Role="Comic" EntitySet="Comic" />
+            <End Role="Follow" EntitySet="Follow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TN_Ca" Association="Self.FK_TN_Ca">
+            <End Role="Comic" EntitySet="Comic" />
+            <End Role="TopName" EntitySet="TopName" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TN_TC" Association="Self.FK_TN_TC">
+            <End Role="TopComic" EntitySet="TopComic" />
+            <End Role="TopName" EntitySet="TopName" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ComicWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Passwords" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Fullname" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Avatar" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="isAdmin" Type="Int32" />
+          <Property Name="Allowed" Type="Int32" />
+          <NavigationProperty Name="Comics" Relationship="Self.FK_Co_Ad" FromRole="Administrator" ToRole="Comic" />
+          <NavigationProperty Name="Follows" Relationship="Self.FK_FL_Ad" FromRole="Administrator" ToRole="Follow" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Categoryname" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descriptions" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category_Comic" Relationship="Self.FK_CaCo_Ca" FromRole="Category" ToRole="Category_Comic" />
+        </EntityType>
+        <EntityType Name="Category_Comic">
+          <Key>
+            <PropertyRef Name="ComicID" />
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="ComicID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descriptions" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_CaCo_Ca" FromRole="Category_Comic" ToRole="Category" />
+          <NavigationProperty Name="Comic" Relationship="Self.FK_CaCo_Co" FromRole="Category_Comic" ToRole="Comic" />
+        </EntityType>
+        <EntityType Name="Comic">
+          <Key>
+            <PropertyRef Name="ComicID" />
+          </Key>
+          <Property Name="ComicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comicname" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Brief" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Tags" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ViewNo" Type="Int32" />
+          <Property Name="Statuss" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Administrator" Relationship="Self.FK_Co_Ad" FromRole="Comic" ToRole="Administrator" />
+          <NavigationProperty Name="Category_Comic" Relationship="Self.FK_CaCo_Co" FromRole="Comic" ToRole="Category_Comic" />
+          <NavigationProperty Name="Follows" Relationship="Self.FK_FL_Co" FromRole="Comic" ToRole="Follow" />
+          <NavigationProperty Name="TopNames" Relationship="Self.FK_TN_Ca" FromRole="Comic" ToRole="TopName" />
+        </EntityType>
+        <EntityType Name="Follow">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ComicID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ComicID" Type="Int32" Nullable="false" />
+          <Property Name="Descriptions" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Administrator" Relationship="Self.FK_FL_Ad" FromRole="Follow" ToRole="Administrator" />
+          <NavigationProperty Name="Comic" Relationship="Self.FK_FL_Co" FromRole="Follow" ToRole="Comic" />
+        </EntityType>
+        <EntityType Name="TopComic">
+          <Key>
+            <PropertyRef Name="TopComicID" />
+          </Key>
+          <Property Name="TopComicID" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TopName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TopNames" Relationship="Self.FK_TN_TC" FromRole="TopComic" ToRole="TopName" />
+        </EntityType>
+        <EntityType Name="TopName">
+          <Key>
+            <PropertyRef Name="TopComicID" />
+            <PropertyRef Name="ComicID" />
+          </Key>
+          <Property Name="TopComicID" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ComicID" Type="Int32" Nullable="false" />
+          <Property Name="Descriptions" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comic" Relationship="Self.FK_TN_Ca" FromRole="TopName" ToRole="Comic" />
+          <NavigationProperty Name="TopComic" Relationship="Self.FK_TN_TC" FromRole="TopName" ToRole="TopComic" />
+        </EntityType>
+        <Association Name="FK_Co_Ad">
+          <End Role="Administrator" Type="Self.Administrator" Multiplicity="1" />
+          <End Role="Comic" Type="Self.Comic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrator">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comic">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FL_Ad">
+          <End Role="Administrator" Type="Self.Administrator" Multiplicity="1" />
+          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrator">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Follow">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaCo_Ca">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Category_Comic" Type="Self.Category_Comic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Category_Comic">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaCo_Co">
+          <End Role="Comic" Type="Self.Comic" Multiplicity="1" />
+          <End Role="Category_Comic" Type="Self.Category_Comic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comic">
+              <PropertyRef Name="ComicID" />
+            </Principal>
+            <Dependent Role="Category_Comic">
+              <PropertyRef Name="ComicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FL_Co">
+          <End Role="Comic" Type="Self.Comic" Multiplicity="1" />
+          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comic">
+              <PropertyRef Name="ComicID" />
+            </Principal>
+            <Dependent Role="Follow">
+              <PropertyRef Name="ComicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TN_Ca">
+          <End Role="Comic" Type="Self.Comic" Multiplicity="1" />
+          <End Role="TopName" Type="Self.TopName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comic">
+              <PropertyRef Name="ComicID" />
+            </Principal>
+            <Dependent Role="TopName">
+              <PropertyRef Name="ComicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TN_TC">
+          <End Role="TopComic" Type="Self.TopComic" Multiplicity="1" />
+          <End Role="TopName" Type="Self.TopName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TopComic">
+              <PropertyRef Name="TopComicID" />
+            </Principal>
+            <Dependent Role="TopName">
+              <PropertyRef Name="TopComicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ComicWebEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrators" EntityType="Self.Administrator" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Category_Comic" EntityType="Self.Category_Comic" />
+          <EntitySet Name="Comics" EntityType="Self.Comic" />
+          <EntitySet Name="Follows" EntityType="Self.Follow" />
+          <EntitySet Name="TopComics" EntityType="Self.TopComic" />
+          <EntitySet Name="TopNames" EntityType="Self.TopName" />
+          <AssociationSet Name="FK_Co_Ad" Association="Self.FK_Co_Ad">
+            <End Role="Administrator" EntitySet="Administrators" />
+            <End Role="Comic" EntitySet="Comics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FL_Ad" Association="Self.FK_FL_Ad">
+            <End Role="Administrator" EntitySet="Administrators" />
+            <End Role="Follow" EntitySet="Follows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaCo_Ca" Association="Self.FK_CaCo_Ca">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category_Comic" EntitySet="Category_Comic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaCo_Co" Association="Self.FK_CaCo_Co">
+            <End Role="Comic" EntitySet="Comics" />
+            <End Role="Category_Comic" EntitySet="Category_Comic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FL_Co" Association="Self.FK_FL_Co">
+            <End Role="Comic" EntitySet="Comics" />
+            <End Role="Follow" EntitySet="Follows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TN_Ca" Association="Self.FK_TN_Ca">
+            <End Role="Comic" EntitySet="Comics" />
+            <End Role="TopName" EntitySet="TopNames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TN_TC" Association="Self.FK_TN_TC">
+            <End Role="TopComic" EntitySet="TopComics" />
+            <End Role="TopName" EntitySet="TopNames" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ComicWebModelStoreContainer" CdmEntityContainer="ComicWebEntities">
+          <EntitySetMapping Name="Administrators">
+            <EntityTypeMapping TypeName="ComicWebModel.Administrator">
+              <MappingFragment StoreEntitySet="Administrator">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Passwords" ColumnName="Passwords" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="Allowed" ColumnName="Allowed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="ComicWebModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Categoryname" ColumnName="Categoryname" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_Comic">
+            <EntityTypeMapping TypeName="ComicWebModel.Category_Comic">
+              <MappingFragment StoreEntitySet="Category_Comic">
+                <ScalarProperty Name="ComicID" ColumnName="ComicID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comics">
+            <EntityTypeMapping TypeName="ComicWebModel.Comic">
+              <MappingFragment StoreEntitySet="Comic">
+                <ScalarProperty Name="ComicID" ColumnName="ComicID" />
+                <ScalarProperty Name="Comicname" ColumnName="Comicname" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Brief" ColumnName="Brief" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="ViewNo" ColumnName="ViewNo" />
+                <ScalarProperty Name="Statuss" ColumnName="Statuss" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Follows">
+            <EntityTypeMapping TypeName="ComicWebModel.Follow">
+              <MappingFragment StoreEntitySet="Follow">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ComicID" ColumnName="ComicID" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TopComics">
+            <EntityTypeMapping TypeName="ComicWebModel.TopComic">
+              <MappingFragment StoreEntitySet="TopComic">
+                <ScalarProperty Name="TopComicID" ColumnName="TopComicID" />
+                <ScalarProperty Name="TopName" ColumnName="TopName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TopNames">
+            <EntityTypeMapping TypeName="ComicWebModel.TopName">
+              <MappingFragment StoreEntitySet="TopName">
+                <ScalarProperty Name="TopComicID" ColumnName="TopComicID" />
+                <ScalarProperty Name="ComicID" ColumnName="ComicID" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

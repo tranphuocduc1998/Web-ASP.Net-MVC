@@ -1,0 +1,158 @@
+﻿@using ComicWeb.Areas.Admin.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ComicWebEntities db = new ComicWebEntities();
+    var DSHH = (from a in db.Comics
+                join b in db.Category_Comic on a.ComicID equals b.ComicID
+                where b.CategoryID == "CHH"
+                select a).ToList();
+
+    var DSHD = (from a in db.Comics
+                join b in db.Category_Comic on a.ComicID equals b.ComicID
+                where b.CategoryID == "CHD"
+                select a).ToList();
+
+    var DSPL = (from a in db.Comics
+                join b in db.Category_Comic on a.ComicID equals b.ComicID
+                where b.CategoryID == "CPL"
+                select a).ToList();
+
+    var DSF = (from a in db.Comics
+               join b in db.Category_Comic on a.ComicID equals b.ComicID
+               where b.CategoryID == "CF"
+               select a).ToList();
+
+    var DSKD = (from a in db.Comics
+                join b in db.Category_Comic on a.ComicID equals b.ComicID
+                where b.CategoryID == "CKD"
+                select a).ToList();
+}
+
+
+<div class="box-theloai">
+    <div class="box-theloai-inner">
+        <button class="tablink" onclick="openPage('funny', this, 'red')" id="defaultOpen">hài hước</button>
+        <button class="tablink" onclick="openPage('Action', this, 'green')">hành động</button>
+        <button class="tablink" onclick="openPage('Avern', this, 'blue')">Phiêu Lưu</button>
+        <button class="tablink" onclick="openPage('Fantasy', this, 'orange')">fantasy</button>
+        <button class="tablink" onclick="openPage('Holy', this, 'orange')">kinh dị</button>
+    </div>
+</div>
+<div class="boxlist-theloai">
+    <div id="funny" class="tabcontent">
+        <ul class="list-item-ul">
+            @foreach (var item in DSHH)
+            {
+                <li class="list-item">
+                    <a href="#" class="list-item-inner">
+                        <div class="list-item-img">
+                            <img src="/Picture/Comic_Img/@item.Picture" />
+                        </div>
+                        <div class="list-item-imgbody">
+                            <p class="list-item-label1"><font style="vertical-align: inherit;">@item.Comicname</font></p>
+                            <p class="list-item-label2"><font style="vertical-align: inherit;">Tác giả:@item.Author</font></p>
+                        </div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div id="Action" class="tabcontent">
+        <ul class="list-item-ul">
+            @foreach (var item in DSHD)
+            {
+                <li class="list-item">
+                    <a href="#" class="list-item-inner">
+                        <div class="list-item-img">
+                            <img src="/Picture/Comic_Img/@item.Picture" />
+                        </div>
+                        <div class="list-item-imgbody">
+                            <p class="list-item-label1"><font style="vertical-align: inherit;">@item.Comicname</font></p>
+                            <p class="list-item-label2"><font style="vertical-align: inherit;">Tác giả:@item.Author</font></p>
+                        </div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div id="Avern" class="tabcontent">
+        <ul class="list-item-ul">
+            @foreach (var item in DSPL)
+            {
+                <li class="list-item">
+                    <a href="#" class="list-item-inner">
+                        <div class="list-item-img">
+                            <img src="/Picture/Comic_Img/@item.Picture" />
+                        </div>
+                        <div class="list-item-imgbody">
+                            <p class="list-item-label1"><font style="vertical-align: inherit;">@item.Comicname</font></p>
+                            <p class="list-item-label2"><font style="vertical-align: inherit;">Tác giả:@item.Author</font></p>
+                        </div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div id="Fantasy" class="tabcontent">
+        <ul class="list-item-ul">
+            @foreach (var item in DSF)
+            {
+                <li class="list-item">
+                    <a href="#" class="list-item-inner">
+                        <div class="list-item-img">
+                            <img src="/Picture/Comic_Img/@item.Picture" />
+                        </div>
+                        <div class="list-item-imgbody">
+                            <p class="list-item-label1"><font style="vertical-align: inherit;">@item.Comicname</font></p>
+                            <p class="list-item-label2"><font style="vertical-align: inherit;">Tác giả:@item.Author</font></p>
+                        </div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div id="Holy" class="tabcontent">
+        <ul class="list-item-ul">
+            @foreach (var item in DSKD)
+            {
+                <li class="list-item">
+                    <a href="#" class="list-item-inner">
+                        <div class="list-item-img">
+                            <img src="/Picture/Comic_Img/@item.Picture" />
+                        </div>
+                        <div class="list-item-imgbody">
+                            <p class="list-item-label1"><font style="vertical-align: inherit;">@item.Comicname</font></p>
+                            <p class="list-item-label2"><font style="vertical-align: inherit;">Tác giả:@item.Author</font></p>
+                        </div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+<script>
+function openPage(pageName,elmnt,color) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+    }
+    document.getElementById(pageName).style.display = "block";
+    elmnt.style.backgroundColor = color;
+
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+

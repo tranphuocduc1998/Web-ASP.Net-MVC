@@ -1,0 +1,303 @@
+﻿* {
+  box-sizing:border-box
+}
+.container{
+    display:block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #717171;
+}
+/* Slideshow container */
+.slideshow-container {
+  min-height: 1px;
+  max-width: none;
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+}
+/* ?n các slider */
+.mySlides {
+    display: none;
+}
+/* Ð?nh d?ng n?i dung Caption */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+ 
+/* d?nh d?ng các ch?m chuy?n d?i các slide */
+.dot {
+  cursor:pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+/* khi du?c hover, active d?i màu n?n */
+.active, .dot:hover {
+  background-color: #717171;
+}
+ 
+/* Thêm hi?u ?ng khi chuy?n d?i các slide */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 4s;
+  animation-name: fade;
+  animation-duration: 4s;
+}
+ 
+.fade a img{
+    max-width: none;
+    width: 100%;
+    height: 500px;
+    border: 1px solid;
+}
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+ 
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/*Sân khấu trình bày*/
+.stage_show{
+    position: relative;
+    margin: 0 auto;
+    height: 2100px;
+    width: 80%;
+}
+
+.title{
+    font-size: 36px;
+    margin-bottom: 2%;
+    text-align: center;
+    font-weight: 300;
+    font-family: Tahoma;
+    border-bottom: 2px solid #0026ff;
+}
+
+.love-body{
+    position: relative;
+    height: auto;
+}
+
+/*Truyện yêu thích trên*/
+.love-body .love-body-top{
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 5%;
+}
+
+.love-body .love-body-top .love-body-top-left{
+    height: 300px;
+    width: 48%;
+    padding-right: 30px;
+    float: left;
+}
+
+.love-body .love-body-top .love-body-top-right{
+    height: 300px;
+    width: 48%;
+    padding-left: 30px;
+    float:left;
+}
+
+.love-img{
+    position: relative;
+}
+
+.comic-number{
+    background: #000000;
+    opacity: 0.7;
+    font-size: 20px;
+    width: 15%;
+    text-align:center;
+    position: absolute;
+    color: #ffd800;
+    border: 1px solid #ff6a00;
+}
+
+.paragraph{
+    background: #000000;
+    opacity: 0.7;
+    font-size: 35px;
+    width: 100%;
+    text-align:center;
+    position: absolute;
+    color: #fcfd00;
+    border: 1px solid #ff6a00;
+    bottom: 0;
+}
+
+.love-body-top .love-img a img{
+    height: 250px;
+    width: 100%;
+    border: 2px solid #ffd800;
+}
+
+/*truyện yêu thích dưới*/
+.love-body .love-body-bot{
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 5%;
+    margin-top: 25%;
+}
+
+.love-body-bot .love-body-bot01{
+    height: 250px;
+    width: 33%;
+    padding-right: 3%;
+    float: left;
+}
+
+.love-body-bot .love-img a img{
+    height: 250px;
+    width: 100%;
+    border: 2px solid #ffd800;
+}
+
+/*female-comic*/
+.female-comic{
+    position: relative;
+    width: 100%;
+    margin-top: 700px;
+}
+
+.female-comic .female-comic-header{
+    font-size: 36px;
+    margin-bottom: 2%;
+    font-weight: 300;
+    font-family: Tahoma;
+    border-bottom: 2px solid #4cff00;
+}
+
+.female-comic .female-comic-body{
+    height: 550px;
+    padding-left: 5%;
+}
+
+/*female-Comic Trái*/
+.female-comic-body .female-comic-left{
+    float: left;
+    width: 40%;
+    height: 500px;
+    padding-right: 2%;
+}
+
+.female-comic-img{
+    position: relative;
+}
+
+.female-comic-img a img{
+    height: 500px;
+    width: 100%;
+    border: 2px solid #ffd800;
+}
+
+/*female-Comic Phải*/
+.female-comic-body .female-comic-right{
+    float: left;
+    width: 55%;
+    height: 500px;
+}
+
+.female-comic-right .female-comic-right-top{
+    height: 250px;
+    width: 100%;
+}
+
+.female-comic-right-top a img{
+    height: 250px;
+    width: 100%;
+    border: 2px solid #ffd800;
+}
+
+.female-comic-right .female-comic-right-bot{
+    height: 250px;
+    width: 100%;
+}
+
+.female-comic-right-bot a img{
+    height: 250px;
+    width: 100%;
+    border: 2px solid #ffd800;
+}
+
+/*male-comic*/
+.male-comic{
+    width: 100%;
+    height: 600px;
+    margin-top: 50px;
+}
+
+.male-comic .male-comic-header{
+    font-size: 36px;
+    margin-bottom: 2%;
+    font-weight: 300;
+    font-family: Tahoma;
+    border-bottom: 2px solid #ff0000;
+}
+
+.male-comic .male-body{
+    height: 550px;
+    padding-left: 5%;
+}
+
+/*male-body-top*/
+.male-body .male-body-top{
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 5%;
+    padding-right: 4%;
+}
+
+.male-body-top .male-img a img{
+    height: 300px;
+    width: 100%;
+    border: 2px solid #ffd800;
+}
+
+
+/*male-body-bot*/
+.male-body .male-body-bot{
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 5%;
+    margin-top: 25px;
+}
+
+.male-body-bot .male-body-bot-left{
+    height: 300px;
+    width: 48%;
+    padding-right: 30px;
+    float: left;
+}
+
+.male-body-bot-right{
+    height: 300px;
+    width: 48%;
+    padding-left: 30px;
+    float:left;
+}
+
+.male-img{
+    position: relative;
+}
+
+.male-body-bot .male-img a img{
+    height: 250px;
+    width: 100%;
+    border: 2px solid #ffd800;
+}

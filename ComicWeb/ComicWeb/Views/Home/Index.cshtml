@@ -1,0 +1,220 @@
+﻿@using ComicWeb.Areas.Admin.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ComicWebEntities db = new ComicWebEntities();
+    var lovetop = (from p in db.Comics orderby p.ViewNo descending select p).Take(5).ToList();
+
+    var maleC = (from a in db.Comics
+                 join b in db.TopNames on a.ComicID equals b.ComicID
+                 where b.TopComicID == "TCM"
+                 orderby a.ViewNo descending
+                 select a).Take(3).ToList();
+
+    var femaleC = (from a in db.Comics
+                   join b in db.TopNames on a.ComicID equals b.ComicID
+                   where b.TopComicID == "TCG"
+                   orderby a.ViewNo descending
+                   select a).Take(3).ToList();
+}
+
+
+<div class="container">
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <a href="#">
+                <img src="~/Picture/Comic_Img/ImgMagi.jpg">
+            </a>
+        </div>
+        <div class="mySlides fade">
+            <a href="#">
+                <img src="~/Picture/Comic_Img/ImgMahou.jpg">
+            </a>
+        </div>
+        <div class="mySlides fade">
+            <a href="#">
+                <img src="~/Picture/Comic_Img/imgQBTH.jpg">
+            </a>
+        </div>
+        <div class="mySlides fade">
+            <a href="#">
+                <img src="~/Picture/Comic_Img/imgTGHM.jpg">
+            </a>
+        </div>
+        <div class="mySlides fade">
+            <a href="#">
+                <img src="~/Picture/Comic_Img/imgSlime.jpg">
+            </a>
+        </div>
+        <div class="text">
+            <div style="text-align:center;">
+                <span class="dot" onclick="currentSlide(0)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+      //khai báo bi?n slideIndex d?i di?n cho slide hi?n t?i
+      var slideIndex;
+      // KHai bào hàm hi?n th? slide
+      function showSlides() {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("dot");
+          for (i = 0; i < slides.length; i++) {
+             slides[i].style.display = "none";
+          }
+          for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+          }
+
+          slides[slideIndex].style.display = "block";
+          dots[slideIndex].className += " active";
+          //chuy?n d?n slide ti?p theo
+          slideIndex++;
+          //n?u dang ? slide cu?i cùng thì chuy?n v? slide d?u
+          if (slideIndex > slides.length - 1) {
+            slideIndex = 0
+          }
+          //t? d?ng chuy?n d?i slide sau 5s
+          setTimeout(showSlides, 8000);
+      }
+      //m?c d?nh hi?n th? slide d?u tiên
+      showSlides(slideIndex = 0);
+
+
+      function currentSlide(n) {
+        showSlides(slideIndex = n);
+      }
+    </script>
+    <div class="stage_show">
+        <section class="love-body">
+            <h3 class="title">Top 5 truyện được yêu thích</h3>
+            <div class="love-body-top">
+                <div class="love-body-top-left">
+                    <div class="love-img">
+                        <a href="#">
+                            <div class="comic-number">1</div>
+                            <div class="paragraph"><p>@lovetop[0].Comicname</p></div>
+                            <img src="/Picture/Comic_Img/@lovetop[0].Picture" />
+                        </a>
+                    </div>
+                </div>
+                <div class="love-body-top-right">
+                    <div class="love-img">
+                        <a href="#">
+                            <div class="comic-number">2</div>
+                            <div class="paragraph"><p>@lovetop[1].Comicname</p></div>
+                            <img src="/Picture/Comic_Img/@lovetop[1].Picture" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="love-body-bot">
+                <div class="love-body-bot01">
+                    <div class="love-img">
+                        <a href="#">
+                            <div class="comic-number">3</div>
+                            <div class="paragraph"><p>@lovetop[2].Comicname</p></div>
+                            <img src="/Picture/Comic_Img/@lovetop[2].Picture" />
+                        </a>
+                    </div>
+                </div>
+                <div class="love-body-bot01">
+                    <div class="love-img">
+                        <a href="#">
+                            <div class="comic-number">4</div>
+                            <div class="paragraph"><p>@lovetop[3].Comicname</p></div>
+                            <img src="/Picture/Comic_Img/@lovetop[3].Picture" />
+                        </a>
+                    </div>
+                </div>
+                <div class="love-body-bot01">
+                    <div class="love-img">
+                        <a href="#">
+                            <div class="comic-number">5</div>
+                            <div class="paragraph"><p>@lovetop[4].Comicname</p></div>
+                            <img src="/Picture/Comic_Img/@lovetop[4].Picture" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="female-comic">
+            <div class="female-comic-header">
+                <p>Comic dành cho bạn nữ! được các bạn nữ yêu thích là</p>
+            </div>
+            <div class="female-comic-body">
+                <div class="female-comic-left">
+                    <div class="female-comic-img">
+                        <a href="#">
+                            <div class="comic-number">1</div>
+                            <div class="paragraph"><p>@femaleC[0].Comicname</p></div>
+                            <img src="/Picture/Comic_Img/@femaleC[0].Picture" />
+                        </a>
+                    </div>
+                </div>
+                <div class="female-comic-right">
+                    <div class="female-comic-right-top">
+                        <div class="female-comic-img">
+                            <a href="#">
+                                <div class="comic-number">2</div>
+                                <div class="paragraph"><p>@femaleC[1].Comicname</p></div>
+                                <img src="/Picture/Comic_Img/@femaleC[1].Picture" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="female-comic-right-bot">
+                        <div class="female-comic-img">
+                            <a href="#">
+                                <div class="comic-number">3</div>
+                                <div class="paragraph"><p>@femaleC[2].Comicname</p></div>
+                                <img src="/Picture/Comic_Img/@femaleC[2].Picture" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="male-comic">
+            <div class="male-comic-header">
+                <p>Comic dành cho bạn nam! được các đọc giả nam bình chọn</p>
+            </div>
+            <div class="male-body">
+                <div class="male-body-top">
+                    <div class="male-img">
+                        <a href="#">
+                            <div class="comic-number">1</div>
+                            <div class="paragraph"><p>@maleC[0].Comicname</p></div>
+                            <img src="/Picture/Comic_Img/@maleC[0].Picture" />
+                        </a>
+                    </div>
+                </div>
+                <div class="male-body-bot">
+                    <div class="male-body-bot-left">
+                        <div class="male-img">
+                            <a href="#">
+                                <div class="comic-number">2</div>
+                                <div class="paragraph"><p>@maleC[1].Comicname</p></div>
+                                <img src="/Picture/Comic_Img/@maleC[1].Picture" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="male-body-bot-right">
+                        <div class="male-img">
+                            <a href="#">
+                                <div class="comic-number">3</div>
+                                <div class="paragraph"><p>@maleC[2].Comicname</p></div>
+                                <img src="/Picture/Comic_Img/@maleC[2].Picture" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

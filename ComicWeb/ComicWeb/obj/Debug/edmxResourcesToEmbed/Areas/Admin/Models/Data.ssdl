@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ComicWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="64" />
+    <Property Name="Passwords" Type="varchar" MaxLength="256" />
+    <Property Name="Fullname" Type="nvarchar" MaxLength="64" />
+    <Property Name="Email" Type="varchar" MaxLength="256" />
+    <Property Name="Avatar" Type="varchar" MaxLength="256" />
+    <Property Name="isAdmin" Type="int" />
+    <Property Name="Allowed" Type="int" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="Categoryname" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Descriptions" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="Category_Comic">
+    <Key>
+      <PropertyRef Name="ComicID" />
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="ComicID" Type="int" Nullable="false" />
+    <Property Name="CategoryID" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="Descriptions" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="Comic">
+    <Key>
+      <PropertyRef Name="ComicID" />
+    </Key>
+    <Property Name="ComicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comicname" Type="nvarchar" MaxLength="512" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="256" />
+    <Property Name="Author" Type="nvarchar" MaxLength="256" />
+    <Property Name="Brief" Type="nvarchar" MaxLength="2000" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Tags" Type="nvarchar" MaxLength="128" />
+    <Property Name="ViewNo" Type="int" />
+    <Property Name="Statuss" Type="nvarchar" MaxLength="32" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Follow">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="ComicID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="ComicID" Type="int" Nullable="false" />
+    <Property Name="Descriptions" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="TopComic">
+    <Key>
+      <PropertyRef Name="TopComicID" />
+    </Key>
+    <Property Name="TopComicID" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="TopName" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="TopName">
+    <Key>
+      <PropertyRef Name="TopComicID" />
+      <PropertyRef Name="ComicID" />
+    </Key>
+    <Property Name="TopComicID" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="ComicID" Type="int" Nullable="false" />
+    <Property Name="Descriptions" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <Association Name="FK_CaCo_Ca">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Category_Comic" Type="Self.Category_Comic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Category_Comic">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CaCo_Co">
+    <End Role="Comic" Type="Self.Comic" Multiplicity="1" />
+    <End Role="Category_Comic" Type="Self.Category_Comic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comic">
+        <PropertyRef Name="ComicID" />
+      </Principal>
+      <Dependent Role="Category_Comic">
+        <PropertyRef Name="ComicID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Co_Ad">
+    <End Role="Administrator" Type="Self.Administrator" Multiplicity="1" />
+    <End Role="Comic" Type="Self.Comic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Comic">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FL_Ad">
+    <End Role="Administrator" Type="Self.Administrator" Multiplicity="1" />
+    <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Follow">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FL_Co">
+    <End Role="Comic" Type="Self.Comic" Multiplicity="1" />
+    <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comic">
+        <PropertyRef Name="ComicID" />
+      </Principal>
+      <Dependent Role="Follow">
+        <PropertyRef Name="ComicID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TN_Ca">
+    <End Role="Comic" Type="Self.Comic" Multiplicity="1" />
+    <End Role="TopName" Type="Self.TopName" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comic">
+        <PropertyRef Name="ComicID" />
+      </Principal>
+      <Dependent Role="TopName">
+        <PropertyRef Name="ComicID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TN_TC">
+    <End Role="TopComic" Type="Self.TopComic" Multiplicity="1" />
+    <End Role="TopName" Type="Self.TopName" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TopComic">
+        <PropertyRef Name="TopComicID" />
+      </Principal>
+      <Dependent Role="TopName">
+        <PropertyRef Name="TopComicID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ComicWebModelStoreContainer">
+    <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category_Comic" EntityType="Self.Category_Comic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comic" EntityType="Self.Comic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Follow" EntityType="Self.Follow" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TopComic" EntityType="Self.TopComic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TopName" EntityType="Self.TopName" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CaCo_Ca" Association="Self.FK_CaCo_Ca">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Category_Comic" EntitySet="Category_Comic" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CaCo_Co" Association="Self.FK_CaCo_Co">
+      <End Role="Comic" EntitySet="Comic" />
+      <End Role="Category_Comic" EntitySet="Category_Comic" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Co_Ad" Association="Self.FK_Co_Ad">
+      <End Role="Administrator" EntitySet="Administrator" />
+      <End Role="Comic" EntitySet="Comic" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FL_Ad" Association="Self.FK_FL_Ad">
+      <End Role="Administrator" EntitySet="Administrator" />
+      <End Role="Follow" EntitySet="Follow" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FL_Co" Association="Self.FK_FL_Co">
+      <End Role="Comic" EntitySet="Comic" />
+      <End Role="Follow" EntitySet="Follow" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TN_Ca" Association="Self.FK_TN_Ca">
+      <End Role="Comic" EntitySet="Comic" />
+      <End Role="TopName" EntitySet="TopName" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TN_TC" Association="Self.FK_TN_TC">
+      <End Role="TopComic" EntitySet="TopComic" />
+      <End Role="TopName" EntitySet="TopName" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

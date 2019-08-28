@@ -1,0 +1,85 @@
+﻿@model ComicWeb.Areas.Admin.Models.Comic
+
+<div>
+    <h4>Comic</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Comicname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comicname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.Picture)*@
+            <img style="height: 200px; width: 200px;" src="/Picture/Comic_Img/@Model.Picture" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Brief)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brief)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tags)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ViewNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ViewNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Statuss)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Statuss)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.ComicID }) |
+    @Html.ActionLink("Quay lại danh sách", "Index")
+</p>

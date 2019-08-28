@@ -1,0 +1,48 @@
+﻿@using ComicWeb.Areas.Admin.Models
+@model Administrators
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div class="login-main">
+    <div class="login-main-stage">
+        <div class="login-cl1">
+            @using (Html.BeginForm())
+            {
+                <div class="login-cl1-center">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @placeholder = "tên đăng nhập của bạn" })
+                        @Html.ValidationMessageFor(model => model.Username)
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(model => model.Passwords, new { @class = "form-control", @placeholder = "password của bạn" })
+                        @Html.ValidationMessageFor(model => model.Passwords)
+                    </div>
+                    <div class="form-group">
+                        <a href="#">
+                            <p>quên mật khẩu</p>
+                        </a>
+                    </div>
+                    <p style="color: red; font-size:18px;">@ViewBag.error</p>
+                    <div class="form-group form-right">
+                        <div class="form-right">
+                            <button type="submit"><p>đăng nhập</p></button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="login-cl2">
+            <div class="login-cl2-center">
+                <div class="font-cl2">
+                    <p>Bạn có thể sử dụng Comic Web thuận tiện hơn thôn qua đăng ký thành viên</p>
+                </div>
+                <a href="/Home/Registration">
+                    <input class="bt-dk" type="button" value="đăng ký thành viên Comic Web" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
